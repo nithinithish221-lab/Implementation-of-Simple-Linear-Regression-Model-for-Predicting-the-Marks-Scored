@@ -60,10 +60,36 @@ plt.ylabel("Scores")
 plt.legend()
 plt.grid(True)
 plt.show()
+# 7) Plot testing results (use X_test sorted for a nicer line)
+order = np.argsort(X_test.flatten())
+X_test_sorted = X_test.flatten()[order]
+Y_test_sorted = Y_test[order]
+Y_pred_sorted = Y_pred[order]
+plt.figure(figsize=(6,4))
+plt.scatter(X_test, Y_test, color="blue", label="Test data")
+plt.plot(X_test_sorted, Y_pred_sorted, color="green", label="Predictions")
+plt.title("Hours vs Scores (Testing set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.legend()
+plt.grid(True)
+plt.show()
+# 8) Evaluation metrics
+mae = mean_absolute_error(Y_test, Y_pred)
+mse = mean_squared_error(Y_test, Y_pred)
+rmse = np.sqrt(mse)
+print("\nMean Absolute Error (MAE):", mae)
+print("Mean Squared Error (MSE):", mse)
+print("Root Mean Squared Error (RMSE):", rmse)
+# 9) Example: predict for new students
+new_hours = np.array([[2.5], [8.0]])   # shape must be (n_samples, 1)
+pred_new = regressor.predict(new_hours)
+print("\nPredictions for new hours", new_hours.flatten(), "=>", np.round(pred_new,2))
 ```
 
 ## Output:
 <img width="743" height="473" alt="image" src="https://github.com/user-attachments/assets/aff78eb2-2a90-489e-95b7-3b182e3bcf4d" />
+<img width="758" height="467" alt="image" src="https://github.com/user-attachments/assets/9cacdd5f-9cb0-4130-a00b-f7aae363cbbc" />
 
 
 
